@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Стенд приёмки — BOB_STUDIO</title>
+<style>
+:root{color-scheme:dark;--bg:#070b14;--card:#101724;--line:#1e293b;--text:#e6edf6;--muted:#93a3b8;--accent:#3b82f6;--ok:#10b981}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:28px 14px 72px;max-width:1040px;margin:0 auto}
+header{border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:22px}
+h1{font-size:clamp(20px,5vw,27px);color:#fff;letter-spacing:-.02em;line-height:1.2}
+.sub{color:var(--muted);font-size:13.5px;margin-top:7px;max-width:640px}
+.top{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.top a{background:#16202f;border:1px solid #263449;color:#cbd5e1;text-decoration:none;font-size:12px;font-weight:600;padding:8px 12px;border-radius:9px}
+.top a:hover{background:#1f2c3f;color:#fff}
+.grid{display:grid;gap:16px;grid-template-columns:1fr}
+@media(min-width:800px){.grid{grid-template-columns:1fr 1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.card:target{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.preview{display:block;position:relative;aspect-ratio:16/10;background:#0b1220;overflow:hidden}
+.preview img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .3s}
+.preview:hover img{transform:scale(1.03)}
+.preview .open{position:absolute;right:10px;bottom:10px;background:rgba(7,11,20,.78);border:1px solid #2b3b52;color:#dbe7f5;font-size:11px;font-weight:600;padding:6px 10px;border-radius:8px}
+.body{padding:16px 16px 14px;display:flex;flex-direction:column;flex:1}
+.head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+h2{font-size:16.5px;color:#fff;font-weight:650;line-height:1.25}
+.ok{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#34d399;background:rgba(16,185,129,.13);border:1px solid rgba(16,185,129,.3);border-radius:6px;padding:3px 7px;white-space:nowrap}
+.ind{color:var(--muted);font-size:12.5px;margin-top:6px}
+.links{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.links a{font-size:11.5px;color:#bfd3ea;background:#16202f;border:1px solid #24334a;border-radius:7px;padding:5px 9px;text-decoration:none}
+.links a:hover{background:#1f2c3f;color:#fff}
+.acts{display:flex;gap:8px;margin-top:14px}
+.btn{flex:1;text-align:center;padding:10px 12px;border-radius:10px;font-size:12.5px;font-weight:600;text-decoration:none;border:1px solid transparent;cursor:pointer}
+.primary{background:var(--accent);color:#fff}
+.primary:hover{background:#2563eb}
+.ghost{background:#16202f;color:#dbe7f5;border-color:#263449}
+.ghost:hover{background:#1f2c3f}
+.review{margin-top:14px;border-top:1px dashed #263449;padding-top:12px}
+.review-label{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:#6f8299;font-weight:700}
+.states{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap}
+.state{font-size:11.5px;padding:6px 10px;border-radius:8px;border:1px solid #263449;background:#131d2b;color:#9fb2c8;cursor:pointer}
+.state.on[data-v="ok"]{background:rgba(16,185,129,.18);border-color:rgba(16,185,129,.5);color:#5eead4}
+.state.on[data-v="fix"]{background:rgba(244,63,94,.16);border-color:rgba(244,63,94,.45);color:#fda4af}
+.state.on[data-v="later"]{background:rgba(148,163,184,.16);border-color:#334155;color:#cbd5e1}
+.note{width:100%;margin-top:8px;background:#0c1421;border:1px solid #24334a;border-radius:9px;color:#dbe7f5;font:inherit;font-size:12.5px;padding:8px 10px;resize:vertical;min-height:38px}
+.note::placeholder{color:#5b6d84}
+.foot{margin-top:26px;background:#0d1624;border:1px dashed #263449;border-radius:14px;padding:16px;font-size:12.5px;color:var(--muted)}
+.foot b{color:#e6edf6}
+.foot .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.summary{margin-top:10px;font-size:12px;color:#9fb2c8;white-space:pre-wrap;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+</style></head>
+<body>
+<header>
+  <h1>Стенд приёмки шаблонов</h1>
+  <p class="sub">Семь отраслевых страниц. В карточке: превью первого экрана, быстрые ссылки на секции и отметка о приёмке. Отметки сохраняются в браузере.</p>
+  <div class="top">
+    <a href="../inspector.html">🎛 Пульт инспектора</a>
+    <a href="../">📊 Витрина проектов</a>
+    <a href="https://igorrost1909-eng.github.io/bob-demo/stand/">🌐 Публичный стенд</a>
+  </div>
+</header>
+<div class="grid">
+    <article class="card" id="card-sokolovskiy" data-slug="sokolovskiy" data-title="Игорь Соколовский">
+      <a class="preview" href="../sokolovskiy/" target="_blank" rel="noopener">
+        <img src="previews/sokolovskiy.jpg" alt="Первый экран: Игорь Соколовский" loading="lazy" decoding="async">
+        <span class="open">Открыть ↗</span>
+      </a>
+      <div class="body">
+        <div class="head">
+          <h2>👤 Игорь Соколовский</h2>
+          <span class="ok">Готов</span>
+        </div>
+        <div class="ind">Операционная трансформация и промышленная ИИ-автоматизация</div>
+        <div class="ind" style="margin-top:8px;color:#7f8ea3;font-style:italic">ИИ-автоматизация бизнес-процессов: ускоряю работу и сокращаю расходы без роста штата…</div>
+        <div class="links"><a href="../sokolovskiy/">Первый экран</a><a href="../sokolovskiy/#configurator">Конфигуратор</a><a href="../sokolovskiy/#calculator">Калькулятор</a><a href="../sokolovskiy/#quiz">Квиз</a><a href="../sokolovskiy/#portfolio">Кейсы</a><a href="../sokolovskiy/#contacts">Контакты</a></div>
+        <div class="acts">
+          <a class="btn primary" href="../sokolovskiy/" target="_blank" rel="noopener">Открыть шаблон</a>
+          <a class="btn ghost" href="../sokolovskiy/#contacts" target="_blank" rel="noopener">Проверить форму</a>
+        </div>
+        <div class="review">
+          <div class="review-label">Фиксация замечаний</div>
+          <div class="states">
+            <button type="button" class="state" data-v="ok">Принято</button>
+            <button type="button" class="state" data-v="fix">Есть замечания</button>
+            <button type="button" class="state" data-v="later">Вернусь позже</button>
+          </div>
+          <textarea class="note" placeholder="Что поправить на этой странице"></textarea>
+        </div>
+      </div>
+    </article>
+    <article class="card" id="card-lera_math" data-slug="lera_math" data-title="Математика с Лерой">
+      <a class="preview" href="../lera_math/" target="_blank" rel="noopener">
+        <img src="previews/lera_math.jpg" alt="Первый экран: Математика с Лерой" loading="lazy" decoding="async">
+        <span class="open">Открыть ↗</span>
+      </a>
+      <div class="body">
+        <div class="head">
+          <h2>📐 Математика с Лерой</h2>
+          <span class="ok">Готов</span>
+        </div>
+        <div class="ind">Персональные занятия по математике для 1-8 классов</div>
+        <div class="ind" style="margin-top:8px;color:#7f8ea3;font-style:italic">Онлайн-репетитор по математике для 1–8 классов: научим понимать суть, а не решать по шаблону, и выйдем на твердую 5 за 8…</div>
+        <div class="links"><a href="../lera_math/">Первый экран</a><a href="../lera_math/#configurator">Конфигуратор</a><a href="../lera_math/#calculator">Калькулятор</a><a href="../lera_math/#quiz">Квиз</a><a href="../lera_math/#portfolio">Кейсы</a><a href="../lera_math/#contacts">Контакты</a></div>
+        <div class="acts">
+          <a class="btn primary" href="../lera_math/" target="_blank" rel="noopener">Открыть шаблон</a>
+          <a class="btn ghost" href="../lera_math/#contacts" target="_blank" rel="noopener">Проверить форму</a>
+        </div>
+        <div class="review">
+          <div class="review-label">Фиксация замечаний</div>
+          <div class="states">
+            <button type="button" class="state" data-v="ok">Принято</button>
+            <button type="button" class="state" data-v="fix">Есть замечания</button>
+            <button type="button" class="state" data-v="later">Вернусь позже</button>
+          </div>
+          <textarea class="note" placeholder="Что поправить на этой странице"></textarea>
+        </div>
+      </div>
+    </article>
+    <article class="card" id="card-doors" data-slug="doors" data-title="Двери B2B">
+      <a class="preview" href="../doors/" target="_blank" rel="noopener">
+        <img src="previews/doors.jpg" alt="Первый экран: Двери B2B" loading="lazy" decoding="async">
+        <span class="open">Открыть ↗</span>
+      </a>
+      <div class="body">
+        <div class="head">
+          <h2>🚪 Двери B2B</h2>
+          <span class="ok">Готов</span>
+        </div>
+        <div class="ind">Противопожарные и премиальные входные двери для строительных объектов</div>
+        <div class="ind" style="margin-top:8px;color:#7f8ea3;font-style:italic">Премиальные противопожарные двери: сдаем в Госстройнадзор с 1-го раза и в срок…</div>
+        <div class="links"><a href="../doors/">Первый экран</a><a href="../doors/#configurator">Конфигуратор</a><a href="../doors/#calculator">Калькулятор</a><a href="../doors/#quiz">Квиз</a><a href="../doors/#portfolio">Кейсы</a><a href="../doors/#contacts">Контакты</a></div>
+        <div class="acts">
+          <a class="btn primary" href="../doors/" target="_blank" rel="noopener">Открыть шаблон</a>
+          <a class="btn ghost" href="../doors/#contacts" target="_blank" rel="noopener">Проверить форму</a>
+        </div>
+        <div class="review">
+          <div class="review-label">Фиксация замечаний</div>
+          <div class="states">
+            <button type="button" class="state" data-v="ok">Принято</button>
+            <button type="button" class="state" data-v="fix">Есть замечания</button>
+            <button type="button" class="state" data-v="later">Вернусь позже</button>
+          </div>
+          <textarea class="note" placeholder="Что поправить на этой странице"></textarea>
+        </div>
+      </div>
+    </article>
+    <article class="card" id="card-ladya" data-slug="ladya" data-title="Ладья">
+      <a class="preview" href="../ladya/" target="_blank" rel="noopener">
+        <img src="previews/ladya.jpg" alt="Первый экран: Ладья" loading="lazy" decoding="async">
+        <span class="open">Открыть ↗</span>
+      </a>
+      <div class="body">
+        <div class="head">
+          <h2>🍳 Ладья</h2>
+          <span class="ok">Готов</span>
+        </div>
+        <div class="ind">Производство кухонь на заказ</div>
+        <div class="ind" style="margin-top:8px;color:#7f8ea3;font-style:italic">Кухня под ваш размер за 21 день с монтажом и фиксированной сметой в договоре…</div>
+        <div class="links"><a href="../ladya/">Первый экран</a><a href="../ladya/#configurator">Конфигуратор</a><a href="../ladya/#calculator">Калькулятор</a><a href="../ladya/#quiz">Квиз</a><a href="../ladya/#portfolio">Кейсы</a><a href="../ladya/#contacts">Контакты</a></div>
+        <div class="acts">
+          <a class="btn primary" href="../ladya/" target="_blank" rel="noopener">Открыть шаблон</a>
+          <a class="btn ghost" href="../ladya/#contacts" target="_blank" rel="noopener">Проверить форму</a>
+        </div>
+        <div class="review">
+          <div class="review-label">Фиксация замечаний</div>
+          <div class="states">
+            <button type="button" class="state" data-v="ok">Принято</button>
+            <button type="button" class="state" data-v="fix">Есть замечания</button>
+            <button type="button" class="state" data-v="later">Вернусь позже</button>
+          </div>
+          <textarea class="note" placeholder="Что поправить на этой странице"></textarea>
+        </div>
+      </div>
+    </article>
+    <article class="card" id="card-nordline" data-slug="nordline" data-title="Nordline">
+      <a class="preview" href="../nordline/" target="_blank" rel="noopener">
+        <img src="previews/nordline.jpg" alt="Первый экран: Nordline" loading="lazy" decoding="async">
+        <span class="open">Открыть ↗</span>
+      </a>
+      <div class="body">
+        <div class="head">
+          <h2>💻 Nordline</h2>
+          <span class="ok">Готов</span>
+        </div>
+        <div class="ind">ИТ-аутсорсинг для B2B</div>
+        <div class="ind" style="margin-top:8px;color:#7f8ea3;font-style:italic">Держим ИТ-инфраструктуру 120 сотрудников под контролем за 12 дней внедрения…</div>
+        <div class="links"><a href="../nordline/">Первый экран</a><a href="../nordline/#configurator">Конфигуратор</a><a href="../nordline/#calculator">Калькулятор</a><a href="../nordline/#quiz">Квиз</a><a href="../nordline/#portfolio">Кейсы</a><a href="../nordline/#contacts">Контакты</a></div>
+        <div class="acts">
+          <a class="btn primary" href="../nordline/" target="_blank" rel="noopener">Открыть шаблон</a>
+          <a class="btn ghost" href="../nordline/#contacts" target="_blank" rel="noopener">Проверить форму</a>
+        </div>
+        <div class="review">
+          <div class="review-label">Фиксация замечаний</div>
+          <div class="states">
+            <button type="button" class="state" data-v="ok">Принято</button>
+            <button type="button" class="state" data-v="fix">Есть замечания</button>
+            <button type="button" class="state" data-v="later">Вернусь позже</button>
+          </div>
+          <textarea class="note" placeholder="Что поправить на этой странице"></textarea>
+        </div>
+      </div>
+    </article>
+    <article class="card" id="card-appdev" data-slug="appdev" data-title="AppCraft">
+      <a class="preview" href="../appdev/" target="_blank" rel="noopener">
+        <img src="previews/appdev.jpg" alt="Первый экран: AppCraft" loading="lazy" decoding="async">
+        <span class="open">Открыть ↗</span>
+      </a>
+      <div class="body">
+        <div class="head">
+          <h2>📱 AppCraft</h2>
+          <span class="ok">Готов</span>
+        </div>
+        <div class="ind">Разработка мобильных приложений и ИИ-автоматизация для бизнеса</div>
+        <div class="ind" style="margin-top:8px;color:#7f8ea3;font-style:italic">Разработка мобильных приложений и ИИ-агентов: запускаем готовый MVP за 45 дней…</div>
+        <div class="links"><a href="../appdev/">Первый экран</a><a href="../appdev/#configurator">Конфигуратор</a><a href="../appdev/#calculator">Калькулятор</a><a href="../appdev/#quiz">Квиз</a><a href="../appdev/#portfolio">Кейсы</a><a href="../appdev/#contacts">Контакты</a></div>
+        <div class="acts">
+          <a class="btn primary" href="../appdev/" target="_blank" rel="noopener">Открыть шаблон</a>
+          <a class="btn ghost" href="../appdev/#contacts" target="_blank" rel="noopener">Проверить форму</a>
+        </div>
+        <div class="review">
+          <div class="review-label">Фиксация замечаний</div>
+          <div class="states">
+            <button type="button" class="state" data-v="ok">Принято</button>
+            <button type="button" class="state" data-v="fix">Есть замечания</button>
+            <button type="button" class="state" data-v="later">Вернусь позже</button>
+          </div>
+          <textarea class="note" placeholder="Что поправить на этой странице"></textarea>
+        </div>
+      </div>
+    </article>
+    <article class="card" id="card-dentline" data-slug="dentline" data-title="Дентлайн">
+      <a class="preview" href="../dentline/" target="_blank" rel="noopener">
+        <img src="previews/dentline.jpg" alt="Первый экран: Дентлайн" loading="lazy" decoding="async">
+        <span class="open">Открыть ↗</span>
+      </a>
+      <div class="body">
+        <div class="head">
+          <h2>🦷 Дентлайн</h2>
+          <span class="ok">Готов</span>
+        </div>
+        <div class="ind">стоматология для всей семьи</div>
+        <div class="ind" style="margin-top:8px;color:#7f8ea3;font-style:italic">Лечение зубов без боли и без навязанных услуг: план и смета до начала работы…</div>
+        <div class="links"><a href="../dentline/">Первый экран</a><a href="../dentline/#configurator">Конфигуратор</a><a href="../dentline/#calculator">Калькулятор</a><a href="../dentline/#quiz">Квиз</a><a href="../dentline/#portfolio">Кейсы</a><a href="../dentline/#contacts">Контакты</a></div>
+        <div class="acts">
+          <a class="btn primary" href="../dentline/" target="_blank" rel="noopener">Открыть шаблон</a>
+          <a class="btn ghost" href="../dentline/#contacts" target="_blank" rel="noopener">Проверить форму</a>
+        </div>
+        <div class="review">
+          <div class="review-label">Фиксация замечаний</div>
+          <div class="states">
+            <button type="button" class="state" data-v="ok">Принято</button>
+            <button type="button" class="state" data-v="fix">Есть замечания</button>
+            <button type="button" class="state" data-v="later">Вернусь позже</button>
+          </div>
+          <textarea class="note" placeholder="Что поправить на этой странице"></textarea>
+        </div>
+      </div>
+    </article>
+</div>
+
+<div class="foot">
+  <b>Формы на публичной витрине.</b> Здесь нет сервера, поэтому форма не падает с ошибкой: она показывает сводку введённых данных и кнопку отправки в Telegram.
+  Если открыть шаблон на машине (порт 5331), заявка сразу уходит в базу, канбан и Telegram.
+</div>
+<div class="foot">
+  <b>Сводка приёмки.</b> Отметьте страницы и напишите замечания, затем отправьте сводку одним нажатием.
+  <div class="summary" id="sum"></div>
+  <div class="row"><a class="btn primary" id="sum-tg" style="flex:0 0 auto;padding:9px 16px" href="#" target="_blank" rel="noopener">Отправить сводку в Telegram</a></div>
+</div>
+<script>
+(function(){
+  var KEY='bob_stand_review_v1';
+  var store={};
+  try{store=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){store={}}
+
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}}
+
+  document.querySelectorAll('.card[data-slug]').forEach(function(card){
+    var slug=card.dataset.slug;
+    var rec=store[slug]||{state:'',note:''};
+    card.querySelectorAll('.state').forEach(function(btn){
+      if(btn.dataset.v===rec.state)btn.classList.add('on');
+      btn.addEventListener('click',function(){
+        card.querySelectorAll('.state').forEach(function(b){b.classList.remove('on')});
+        btn.classList.add('on');
+        rec.state=btn.dataset.v;
+        store[slug]=rec;save();render();
+      });
+    });
+    var note=card.querySelector('.note');
+    if(note){
+      note.value=rec.note||'';
+      note.addEventListener('input',function(){rec.note=note.value;store[slug]=rec;save();render();});
+    }
+  });
+
+  function render(){
+    var lines=[],names={ok:'принято',fix:'есть замечания',later:'вернусь позже'};
+    document.querySelectorAll('.card[data-slug]').forEach(function(card){
+      var slug=card.dataset.slug,rec=store[slug]||{};
+      var title=card.dataset.title||slug;
+      if(rec.state||rec.note){
+        lines.push(title+' — '+(names[rec.state]||'без статуса')+(rec.note?' | '+rec.note:''));
+      }
+    });
+    var box=document.getElementById('sum');
+    if(box)box.textContent=lines.length?lines.join('\n'):'Пока ничего не отмечено.';
+    var link=document.getElementById('sum-tg');
+    if(link){
+      var text='Приёмка шаблонов Мастерской\n'+(lines.length?lines.join('\n'):'без отметок');
+      link.href='https://t.me/share/url?url='+encodeURIComponent('https://igorrost1909-eng.github.io/bob-demo/stand/')+'&text='+encodeURIComponent(text);
+    }
+  }
+  render();
+})();
+</script>
+</body></html>
