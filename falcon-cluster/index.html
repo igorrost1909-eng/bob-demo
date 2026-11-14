@@ -492,6 +492,8 @@ img, svg, canvas { max-width: 100%; }
   .text-\[9px\]  { font-size: 10.5px; line-height: 1.35; }
   .text-\[10px\] { font-size: 11.5px; line-height: 1.4; }
   .text-\[11px\] { font-size: 12px;   line-height: 1.45; }
+  /* Фиксированная шапка 54px перекрывала заголовки при переходе по якорям */
+  section[id], footer[id] { scroll-margin-top: 68px; }
   /* Шапка: полупрозрачный фон без blur просвечивал текстом секций */
   .header-solid {
     background-color: rgba(4, 8, 20, .92);
@@ -843,7 +845,7 @@ img, svg, canvas { max-width: 100%; }
   </section>
 
   <!-- РАЗДЕЛ 03: КЛАССИЧЕСКАЯ СТРОГАЯ ТАБЛИЦА СРАВНЕНИЯ (ВСЕ 4 СТРОКИ ПОЛНОСТЬЮ ПОМЕЩАЮТСЯ НА ЭКРАНЕ БЕЗ СКРОЛЛА) -->
-  <section id="comparison" class="relative min-h-[calc(100vh-54px)] py-3 flex flex-col justify-center z-10 bg-transparent">
+  <section id="comparison" class="relative py-14 lg:py-20 flex flex-col justify-center z-10 bg-transparent">
     <div class="max-w-[1440px] mx-auto px-4 sm:px-6 w-full">
       <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-3.5 gap-2">
         <div>
